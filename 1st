@@ -1,0 +1,29 @@
+//Making Pythagoras theorem 
+
+#include <iostream>
+#include <cmath>
+
+using std::cout;
+
+main(){
+
+    double a;
+    double b;
+    double hypotnuse;
+    double d;
+
+    std::cout<<"Enter side A = ";
+    std::cin>>a;
+
+    std::cout<<"Enter side B = ";
+    std::cin>>b;
+
+    hypotnuse=pow(a,2) + pow(b,2);
+    d=sqrt(hypotnuse);
+    
+    cout<<"The hypotnuse of the right angled triangle is "<<d<<"cm";
+
+    return 0;
+
+}
+

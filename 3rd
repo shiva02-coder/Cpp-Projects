@@ -1,0 +1,82 @@
+//A mini calculator using both if-else and cases...
+
+#include <iostream>
+
+int main(){
+
+    char op;
+    double num1;
+    double num2;
+    double result;
+
+    std::cout<< "***************Calculater*********************\n";
+
+    std::cout<<"Enter #1 : ";
+    std::cin>>num1;
+    
+    std::cout<<"Enter either (+ - * /): ";
+    std::cin>>op;
+
+    std::cout<<"Enter #2 : ";
+    std::cin>>num2;
+
+
+    if (op=='+'){
+         result=num1+num2;;            
+            std::cout<<"Result : "<<result<<"\n";
+            return 0;
+    }
+    else if(op=='-'){
+        result=num1-num2;            
+            std::cout<<"Result : "<<result<<"\n";
+            return 0;
+    }
+    else if(op=='*'){
+        result=num1*num2;
+            std::cout<<"Result : "<<result<<"\n";
+            return 0;
+    }
+    else if(op=='/'){
+        result=num1/num2;
+            std::cout<<"Result : "<<result<<"\n";
+            return 0;
+    }
+    else{ 
+        std::cout<<"You fool enter between the given operaters!"; 
+            return 0;
+    }
+
+    std::cout<<"***********************************************";   
+}
+
+                                                                          
+    /*switch(op){           //here i did it with case statements..
+
+        case '+':
+            result=num1+num2;;            
+            std::cout<<"Result : "<<result<<"\n";
+            break;
+
+        case '-':
+            result=num1-num2;
+            std::cout<<"Result : "<<result<<"\n";
+            break;
+
+        case '*':
+            result=num1*num2;
+            std::cout<<"Result : "<<result<<"\n";
+            break;
+
+        case '/':
+            result:num1/num2;
+            std::cout<<"Result : "<<result<<"\n";    
+            break;
+
+        default:
+            std::cout<<"You fool enter between the given operaters!"; 
+            break;   
+    }
+
+    std::cout<<"***********************************************";
+
+    return 0;*/
