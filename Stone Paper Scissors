@@ -1,0 +1,164 @@
+
+#include <iostream>
+#include <ctime>                                                                //to generate random number with the help of time...
+#include <cstdlib>
+
+
+//func. Definations...
+int getUserChoice(std::string playerName);        
+int GetComputerChoice();                  
+void showChoice(int choice);                                                    //Gives option to select between choices of play with either player or oponnent...
+void chooseWinner(int player,int oponent,std::string mode);                     //this std::string mode is because we can't just take and use anywhere,it’s just a parameter placeholder so the function knows what value you sent from main...
+
+
+int main() {
+
+    std::string mode;
+    int player,oponent;                                                         //player = you, opponent = either computer or player 2...
+    char playAgain;                                                             //to get the input from user to restart the game...  
+    char nextAction;                                                            //to select mode between PvP or PvC...
+
+
+do{                                                                             //Outer do–while → It will always kick you back to mode selection every time you loop...
+   
+    std::cout<<"\nSelect Mode : { Desi Ghee Versus Computer(CP) }  or  { Desi Ghee Versus Real Person(PP) } : ";
+    std::cin>>mode;
+
+   do{                                                                          //Inner do–while → lets you repeat a round in the same mode
+
+    if (mode=="CP" || mode=="cp" || mode=="Cp" || mode =="cP"){                 //this is for the mode that will allow us to play with oponentand player..
+        std::cout<<"\n----------------P v C---------------- \n";
+        
+        player=getUserChoice("Desi Ghee");                                      //TO GET input from user but in this we did not want to show it in the screen,just save it internally..
+        std::cout<<"\nDesi Ghee's Choice : ";                                   //now this will display my choice only when i play verses with computer..
+        system("cls");
+        std::cout<<"Desi Ghee's Choice : ";
+        showChoice(player);
+        
+        oponent=GetComputerChoice();                                            //It stores the whole logic behind the random number generate of oponentchoice...made this big getcomputerchoice smaller to just 'computer'..
+        std::cout<<"Computer's Choice : ";
+        showChoice(oponent);                                                    //this computer(getcomputerchoice) will select the number between 1-3 randomly and then this showChoice will connet that numbers to the real text meanings..
+        
+        std::cout<<std::endl;
+        chooseWinner(player,oponent,"CP");                                      //It compares and displays the final result...
+    }
+
+    else if(mode=="PP" || mode=="pp" || mode=="Pp" || mode=="pP"){
+        std::cout<<"\n----------------P v P---------------- \n";
+        
+        std::cout<<"         *Desi Ghee's Turn*\n ";
+        player=getUserChoice("Shivang");
+        system("cls");                                                          //Using this, Entered Choice will be cleared with the whole earlier written text... 
+
+        std::cout<<"         *Oponent's Turn*\n";
+        oponent=getUserChoice("Oponent");                                       //both the players had made and saved the choices, so now we can print who choose what and can compare it...
+        system("cls");
+
+        std::cout<<"\nDesi Ghee Selected : ";
+        showChoice(player);
+        std::cout<<"Oponent Selected : ";
+        showChoice(oponent);
+        std::cout<<"\n";
+        
+        chooseWinner(player,oponent,"PP");                                      //we defined extra result cuz we will now add condition for our program i.e for counting the number of wins or loss...
+    }
+
+    std::cout<<"\nPress 'Y' to play again : ";
+    std::cout<<"\nPress 'M' to Change Mode : ";
+    std::cout<<"\nPress 'E' to Exit Game : \n";
+    std::cin>>nextAction; 
+    }                                                                           //char have to be ' ' single quetes so remember that and follow down below...
+    while(nextAction=='Y' || nextAction=='y');                                    //If user didn't click y then the next block of code will run, another way of putting this is : this all will run again until user click another alphabet, after that the next lines of code will work...,
+
+    if(nextAction == 'M' || nextAction == 'm'){
+        system("cls");                                                          //this thing clear the whole terminal beforehead...
+        continue;                                                               //this will skip inner loop and move onto outer loop...                                                
+    }
+    else if(nextAction =='E' || nextAction =='e'){
+        std::cout << "\nThanks for playing !!\n\n";
+        break;
+    }
+    else {
+    std::cout<<"\nInvalid Input !\n";
+    break;}
+    
+}                                                                   
+while(true);                                                                    //this will be printed below the 'press 'Y' to exit' and whenever i press m or M it will take me back to the select oponent option and rerun the program with the changes..
+
+}
+
+
+int getUserChoice(std::string playerName){
+
+    int playerChoice;
+    
+    do{
+       std::cout<<"Choose : Rock-1 , Paper-2 , Scissors-3\n";
+       std::cin>>playerChoice; 
+    }while( playerChoice<1 || playerChoice>3 );                                 //it means do this,and while or if(condition) is true then repeat. So in this we will run this loop again and again if player enters number smaller than 1 and also if number is greater than 3.
+
+    return playerChoice;
+}
+
+
+int GetComputerChoice(){
+
+    srand(time(0));                                                             //It shuffles the deck based on current time..
+
+    int num = rand() % 3 + 1;                                                   //firstly this rand generates a random number,secondly this %3 is used quinki any number devided by 3 always gives ressult 0 or 1 or 2,thirdly the +1 shifts this 0,1,2 to 1,2,3...
+//                                                                              So, the line int num = rand() % 3 + 1; means: 1.Get a big random number from rand(). 
+//                                                                              2.Find the remainder when divided by 3 (this gives you 0, 1, or 2).
+//                                                                              3.Add 1 to that result (this gives you 1, 2, or 3).
+//                                                                              Final Result: The variable num will randomly hold the value 1, 2, or 3.                                            
+ 
+    switch(num){            
+        case 1: return 1;                                                       //this returning thing is also similar to std::cout just in this we are giving the values internally to oponent to randamize it.
+        case 2: return 2;                                                       //this will go to the main function and in it showchoce(computer) will connect results..
+        case 3: return 3;      
+    }
+    return 0;
+} 
+
+
+void showChoice(int choice){                                                     //Icreated a switch inside showChoice funtion and it does like when i enter 1 it shows you entered rock and same for others etc..
+    
+    switch (choice){
+        case 1:std::cout<<"Rock!\n";
+                break;
+        case 2:std::cout<<"Paper!\n";
+                break;
+        case 3:std::cout<<"Scissors!\n";
+                break;    
+    }
+
+}
+
+
+void chooseWinner(int player,int oponent,std::string mode){                      //Here, the input of player(form GetUserInput) and computer(GetComputerInput) got compared via adding switch and if-else...
+ 
+  switch (player){                                                               //By adding player in switch, i can control the possible commands of user and then compare it with the oponent's input...
+
+    case 1 : if(oponent==1){                                                     //Case 1 says, when i(Player1) enters 1 i.e rock, then it got compared with all the choices that oponnent have, so at the end we'll be getting right one and it will print that statement...
+             std::cout<<"It's a Tie !\n ";}
+             else if(oponent==2){
+             std::cout<<"Opponent Won !\n";}   
+             else{std::cout<<"Desi Ghee Won !\n";}
+             break; 
+            
+    case 2 : if(oponent==2){
+             std::cout<<"It's a Tie !\n ";}
+             else if(oponent==1){
+             std::cout<<"Desi Ghee Won !\n";}
+             else{std::cout<<"Oponent Won, Desi Ghee lost !\n";}
+             break;
+
+    case 3 : if(oponent==3){
+             std::cout<<"It's a hell Tie !\n";}
+             else if(oponent==2){
+             std::cout<<"You Won!\n";}
+             else{std::cout<<"Desi Ghee Lost, Oponent Won !\n";}
+             break;       
+    
+    }
+ 
+ }
